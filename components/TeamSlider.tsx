@@ -114,18 +114,33 @@ export function TeamSlider() {
   // Strip has 2*N cards; each card is 1/3 of container. So one card = 100/(2*N) % of strip width.
   const translateXPercent = (index * 100) / (2 * N);
 
+  const easeOut = [0.16, 1, 0.3, 1] as const;
+
   return (
     <section
       id="team"
       className="border-t border-[var(--border)] px-4 py-16 sm:px-6"
     >
       <div className="mx-auto max-w-6xl">
-        <h2 className="text-center text-2xl font-bold text-white sm:text-3xl">
+        <motion.h2
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.7, ease: easeOut }}
+          className="text-center text-2xl font-bold text-white sm:text-3xl"
+        >
           Unser Team
-        </h2>
+        </motion.h2>
 
+        <motion.div
+          initial={{ opacity: 0, y: 32 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.65, delay: 0.15, ease: easeOut }}
+          className="mt-12"
+        >
         {/* Mobile: single card carousel */}
-        <div className="mt-12 md:hidden">
+        <div className="md:hidden">
           <div className="flex justify-center">
             <TeamCard
               member={teamMembers[index % N]}
@@ -168,7 +183,7 @@ export function TeamSlider() {
         </div>
 
         {/* Desktop: 3 cards, sliding strip, auto + click */}
-        <div className="relative mt-12 hidden md:block" ref={containerRef}>
+        <div className="relative hidden md:block" ref={containerRef}>
           <div className="overflow-hidden">
             <motion.div
               className="flex"
@@ -225,6 +240,7 @@ export function TeamSlider() {
             ))}
           </div>
         </div>
+        </motion.div>
       </div>
     </section>
   );

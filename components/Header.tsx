@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "motion/react";
 
 const navLinks: { href: string; label: string; cta?: boolean }[] = [
@@ -21,9 +22,17 @@ export function Header() {
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
         <Link
           href="/"
-          className="text-xl font-bold text-white transition hover:text-[var(--secondary)]"
+          className="flex shrink-0 items-center transition opacity-90 hover:opacity-100"
+          aria-label="Humanity Squad – Startseite"
         >
-          Humanity Squad
+          <Image
+            src="/logo.png"
+            alt="Humanity Squad"
+            width={280}
+            height={80}
+            className="max-h-14 w-auto object-contain sm:max-h-16"
+            priority
+          />
         </Link>
         <ul className="flex items-center gap-2 sm:gap-6">
           {navLinks.map((link) => (

@@ -1,5 +1,10 @@
+"use client";
+
 import Link from "next/link";
+import { motion } from "motion/react";
 import { InstagramIcon, WhatsAppIcon } from "@/components/Icons";
+
+const easeOut = [0.16, 1, 0.3, 1] as const;
 
 const footerLinks = [
   { href: "/", label: "Start" },
@@ -22,7 +27,12 @@ export function Footer() {
     >
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
         <div className="flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6, ease: easeOut }}
+          >
             <p className="text-lg font-bold text-white">Humanity Squad</p>
             <p className="mt-1 text-sm text-[var(--foreground-muted)]">
               Gemeinsam die Welt verbessern.
@@ -33,8 +43,14 @@ export function Footer() {
             >
               contact@humanitysquad.de
             </a>
-          </div>
-          <div className="flex flex-col gap-4 sm:flex-row sm:gap-8">
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.1, ease: easeOut }}
+            className="flex flex-col gap-4 sm:flex-row sm:gap-8"
+          >
             <div>
               <p className="text-xs font-semibold uppercase tracking-wider text-[var(--muted)]">
                 Seiten
@@ -76,15 +92,27 @@ export function Footer() {
                 })}
               </ul>
             </div>
-          </div>
+          </motion.div>
         </div>
-        <p className="mt-8 border-t border-[var(--border)] pt-8 text-center text-xs text-[var(--muted)]">
+        <motion.p
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.5, delay: 0.2, ease: easeOut }}
+          className="mt-8 border-t border-[var(--border)] pt-8 text-center text-xs text-[var(--muted)]"
+        >
           © {new Date().getFullYear()} Humanity Squad. Aktiv für einen guten
           Zweck.
-        </p>
-        <p className="mt-2 text-center text-xs text-[var(--muted)]">
+        </motion.p>
+        <motion.p
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.5, delay: 0.28, ease: easeOut }}
+          className="mt-2 text-center text-xs text-[var(--muted)]"
+        >
           Website by Caner Elmas
-        </p>
+        </motion.p>
       </div>
     </footer>
   );

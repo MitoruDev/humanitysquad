@@ -4,25 +4,41 @@ import { motion } from "motion/react";
 import Link from "next/link";
 import { InstagramIcon } from "@/components/Icons";
 
+const easeOut = [0.16, 1, 0.3, 1] as const;
+
 export function CTA() {
   return (
-    <motion.section
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.5 }}
+    <section
       className="border-t border-[var(--border)] px-4 py-16 sm:px-6"
       style={{ background: "var(--gradient-card)" }}
     >
       <div className="mx-auto max-w-2xl text-center">
-        <h2 className="text-2xl font-bold text-white sm:text-3xl">
+        <motion.h2
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.7, ease: easeOut }}
+          className="text-2xl font-bold text-white sm:text-3xl"
+        >
           Mach mit!
-        </h2>
-        <p className="mt-4 text-lg text-[var(--foreground-muted)]">
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, delay: 0.12, ease: easeOut }}
+          className="mt-4 text-lg text-[var(--foreground-muted)]"
+        >
           Folge uns auf Instagram, tritt der WhatsApp-Community bei oder
           unterstütze uns bei den nächsten Einsätzen.
-        </p>
-        <div className="mt-8 flex flex-wrap justify-center gap-4">
+        </motion.p>
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, delay: 0.25, ease: easeOut }}
+          className="mt-8 flex flex-wrap justify-center gap-4"
+        >
           <Link
             href="/spenden"
             className="rounded-full px-6 py-3 font-medium text-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] focus:ring-offset-2 focus:ring-offset-[var(--background)]"
@@ -48,8 +64,8 @@ export function CTA() {
           >
             Einsätze ansehen
           </Link>
-        </div>
+        </motion.div>
       </div>
-    </motion.section>
+    </section>
   );
 }
