@@ -25,18 +25,25 @@ export function Header() {
         >
           Humanity Squad
         </Link>
-        <ul className="flex items-center gap-4 sm:gap-6">
+        <ul className="flex items-center gap-2 sm:gap-6">
           {navLinks.map((link) => (
             <li key={link.href}>
               <Link
                 href={link.href}
                 className={
                   link.cta
-                    ? "rounded-full bg-[var(--primary)]/50 px-4 py-2 text-sm font-medium text-white transition hover:bg-[var(--primary)] focus:outline-none focus:ring-2 focus:ring-[var(--secondary)]"
+                    ? "inline-flex items-center justify-center rounded-full bg-[var(--primary)]/50 px-3 py-2 text-center text-xs font-medium leading-tight text-white transition hover:bg-[var(--primary)] focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] sm:px-4 sm:text-sm sm:leading-normal"
                     : "text-sm font-medium text-[var(--foreground-muted)] transition hover:text-[var(--secondary)]"
                 }
               >
-                {link.label}
+                {link.cta ? (
+                  <>
+                    <span className="sm:hidden">Spenden</span>
+                    <span className="hidden sm:inline">{link.label}</span>
+                  </>
+                ) : (
+                  link.label
+                )}
               </Link>
             </li>
           ))}
