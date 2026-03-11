@@ -24,8 +24,17 @@ export function Hero() {
         transition={{ duration: 0.6 }}
         className="relative z-10 max-w-4xl text-center"
       >
-        <h1 className="text-4xl font-bold tracking-tight text-white drop-shadow-lg sm:text-5xl md:text-6xl">
-          <span className="bg-gradient-to-r from-white via-[var(--secondary)] to-white/90 bg-clip-text text-transparent">
+        <h1 className="text-4xl font-bold tracking-tight drop-shadow-lg sm:text-5xl md:text-6xl">
+          <span
+            className="inline-block bg-clip-text text-transparent"
+            style={{
+              backgroundImage:
+                "linear-gradient(90deg, #fff 0%, #c4a8d9 50%, #fff 100%)",
+              backgroundClip: "text",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+            }}
+          >
             Humanity Squad
           </span>
         </h1>
@@ -51,26 +60,21 @@ export function Hero() {
           transition={{ delay: 0.5, duration: 0.4 }}
           className="mt-10"
         >
-          <a
+          <motion.a
             href="http://whatsapp.humanitysquad.de"
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex items-center rounded-full px-8 py-4 text-lg font-semibold text-white shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] focus:ring-offset-2 focus:ring-offset-[var(--background)]"
+            className="group inline-flex items-center rounded-full px-8 py-4 text-lg font-semibold text-white shadow-lg focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] focus:ring-offset-2 focus:ring-offset-[var(--background)]"
             style={{
               background: "var(--gradient-cta)",
               boxShadow: "0 0 32px var(--glow-secondary)",
             }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = "var(--gradient-cta-hover)";
-              e.currentTarget.style.boxShadow = "0 0 40px var(--glow-secondary), 0 0 60px rgba(232, 121, 168, 0.15)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = "var(--gradient-cta)";
-              e.currentTarget.style.boxShadow = "0 0 32px var(--glow-secondary)";
-            }}
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.98 }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
           >
             Jetzt Mitmachen!
-          </a>
+          </motion.a>
         </motion.div>
       </motion.div>
     </section>
