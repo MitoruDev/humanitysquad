@@ -52,6 +52,13 @@ export const einsaetze: Einsatz[] = [
   },
 ];
 
+/** Stats für Zahlen-Banner: abgeschlossene Einsätze + Summe aus amountRaised */
+export function getEinsatzStats(): { count: number; totalRaised: number } {
+  const completed = einsaetze.filter((e) => !e.isPlanned);
+  const totalRaised = completed.reduce((sum, e) => sum + (e.amountRaised ?? 0), 0);
+  return { count: completed.length, totalRaised };
+}
+
 /** Nächster geplanter Einsatz (für Teaser auf Landing) */
 export function getNextEinsatz(): Einsatz | undefined {
   const now = new Date();

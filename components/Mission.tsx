@@ -5,6 +5,7 @@ import { motion } from "motion/react";
 export function Mission() {
   return (
     <motion.section
+      id="mission"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true, margin: "-80px" }}
