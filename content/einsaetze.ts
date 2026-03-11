@@ -48,6 +48,7 @@ export const einsaetze: Einsatz[] = [
     location: "NRW",
     description: "Geplante Verteilung – Details folgen.",
     isPlanned: true,
+    media: { type: "image", url: "/wirhelfen.png" },
   },
 ];
 
