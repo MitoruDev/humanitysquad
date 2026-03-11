@@ -21,7 +21,7 @@ export const teamMembers: TeamMember[] = [
   {
     id: "3",
     name: "Marie",
-    image: "/team/emilio.png",
+    image: "/team/marie.png",
     shortSentence: "Videograph.",
   },
   {
@@ -39,7 +39,7 @@ export const teamMembers: TeamMember[] = [
   {
     id: "6",
     name: "Kiki",
-    image: "/team/placeholder.svg",
+    image: "/team/kiki.png",
     shortSentence: "Organisator",
   },
   {
