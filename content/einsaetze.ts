@@ -21,7 +21,7 @@ export const einsaetze: Einsatz[] = [
     date: "2025-12-19",
     title: "Erster Einsatz",
     location: "Dortmund",
-    description: "Verteilung von Lebensmitteln, Mützen, Süßigkeiten und selbstgebackenen Keksen.",
+    description: "Verteilung von Lebensmitteln, Mützen, Socken und selbstgebackenen Keksen.",
     isPlanned: false,
     media: [
       { type: "image", url: "/211225-dortmund.png" },
