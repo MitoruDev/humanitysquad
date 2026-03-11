@@ -1,4 +1,5 @@
 import { Hero } from "@/components/Hero";
+import { StatsBanner } from "@/components/StatsBanner";
 import { Mission } from "@/components/Mission";
 import { WhatWeDo } from "@/components/WhatWeDo";
 import { EventsTeaser } from "@/components/EventsTeaser";
@@ -9,6 +10,7 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <StatsBanner />
       <Mission />
       <WhatWeDo />
       <EventsTeaser />

@@ -15,6 +15,9 @@ export interface Einsatz {
   media?: EinsatzMedia | EinsatzMedia[];
 }
 
+/** Anzeige Gesamtsumme gesammelt (Spenden, Startkapital, Events etc.) – manuell pflegen */
+export const DISPLAY_TOTAL_RAISED = "371 €";
+
 export const einsaetze: Einsatz[] = [
   {
     id: "1",
@@ -52,11 +55,10 @@ export const einsaetze: Einsatz[] = [
   },
 ];
 
-/** Stats für Zahlen-Banner: abgeschlossene Einsätze + Summe aus amountRaised */
-export function getEinsatzStats(): { count: number; totalRaised: number } {
+/** Stats für Zahlen-Banner: Anzahl Einsätze + Anzeige Gesamtsumme (manuell in DISPLAY_TOTAL_RAISED) */
+export function getEinsatzStats(): { count: number; totalRaisedDisplay: string } {
   const completed = einsaetze.filter((e) => !e.isPlanned);
-  const totalRaised = completed.reduce((sum, e) => sum + (e.amountRaised ?? 0), 0);
-  return { count: completed.length, totalRaised };
+  return { count: completed.length, totalRaisedDisplay: DISPLAY_TOTAL_RAISED };
 }
 
 /** Nächster geplanter Einsatz (für Teaser auf Landing) */
