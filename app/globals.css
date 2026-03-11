@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+/* Humanity Squad – Modern Dark Theme */
+:root {
+  --background: #0c0814;
+  --background-elevated: #120e1a;
+  --foreground: #fafafa;
+  --foreground-muted: #a1a1aa;
+  --primary: #5b3d7a;
+  --primary-soft: #7c5c9e;
+  --secondary: #c4a8d9;
+  --accent: #e879a8;
+  --accent-soft: #f0abce;
+  --muted: #71717a;
+  --border: rgba(255, 255, 255, 0.06);
+  --border-accent: rgba(196, 168, 217, 0.25);
+  --glow-primary: rgba(91, 61, 122, 0.4);
+  --glow-secondary: rgba(196, 168, 217, 0.25);
+  --gradient-hero: radial-gradient(ellipse 100% 80% at 50% 0%, rgba(91, 61, 122, 0.35) 0%, transparent 55%),
+    radial-gradient(ellipse 80% 50% at 80% 50%, rgba(196, 168, 217, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 20% 80%, rgba(232, 121, 168, 0.08) 0%, transparent 45%);
+  --gradient-cta: linear-gradient(135deg, #7c5c9e 0%, #c4a8d9 50%, #e879a8 100%);
+  --gradient-cta-hover: linear-gradient(135deg, #8b6aae 0%, #d4b8e8 50%, #f0abce 100%);
+  --gradient-card: linear-gradient(145deg, rgba(91, 61, 122, 0.15) 0%, rgba(18, 14, 26, 0.9) 100%);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-muted: var(--muted);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* Modern focus ring */
+*:focus-visible {
+  outline: 2px solid var(--secondary);
+  outline-offset: 2px;
+}
