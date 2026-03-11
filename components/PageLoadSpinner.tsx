@@ -1,28 +1,35 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+
+const MIN_SHOW_MS = 400;
+const MAX_SHOW_MS = 1200;
 
 export function PageLoadSpinner() {
   const [visible, setVisible] = useState(true);
+  const startRef = useRef<number>(0);
 
   useEffect(() => {
-    const hide = () => setVisible(false);
-    const onLoad = () => {
-      // Minimum display so the spinner is visible briefly
-      const elapsed = performance.now();
-      const minShow = 600;
-      const remaining = Math.max(0, minShow - elapsed);
-      setTimeout(hide, remaining);
+    startRef.current = performance.now();
+    let mounted = true;
+    const hide = () => {
+      if (!mounted) return;
+      const elapsed = performance.now() - startRef.current;
+      const remaining = Math.max(0, MIN_SHOW_MS - elapsed);
+      setTimeout(() => {
+        if (mounted) setVisible(false);
+      }, remaining);
     };
     if (document.readyState === "complete") {
-      onLoad();
-      return;
+      hide();
+      return () => { mounted = false; };
     }
-    window.addEventListener("load", onLoad);
-    const t = setTimeout(onLoad, 2500);
+    window.addEventListener("load", hide);
+    const fallback = setTimeout(hide, MAX_SHOW_MS);
     return () => {
-      window.removeEventListener("load", onLoad);
-      clearTimeout(t);
+      mounted = false;
+      window.removeEventListener("load", hide);
+      clearTimeout(fallback);
     };
   }, []);
 

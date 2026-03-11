@@ -13,11 +13,15 @@ function TeamCard({
   member,
   className,
   style,
+  priority = false,
 }: {
   member: (typeof teamMembers)[0];
   className?: string;
   style?: React.CSSProperties;
+  priority?: boolean;
 }) {
+  const [loaded, setLoaded] = useState(false);
+
   return (
     <article
       className={`flex shrink-0 flex-col items-center rounded-2xl border border-[var(--border-accent)] p-6 transition hover:border-[var(--secondary)]/40 md:w-1/3 ${className ?? ""}`}
@@ -27,6 +31,13 @@ function TeamCard({
         className="relative h-40 w-40 overflow-hidden rounded-full border-2 border-[var(--border-accent)] sm:h-44 sm:w-44"
         style={{ boxShadow: "0 0 32px var(--glow-secondary)" }}
       >
+        {/* Placeholder until image has loaded */}
+        {!loaded && (
+          <div
+            className="absolute inset-0 animate-pulse rounded-full bg-[var(--primary)]/30"
+            aria-hidden
+          />
+        )}
         <Image
           src={member.image}
           alt={member.name}
@@ -34,6 +45,8 @@ function TeamCard({
           className="object-cover"
           sizes="(min-width: 768px) 176px, 160px"
           unoptimized
+          priority={priority}
+          onLoad={() => setLoaded(true)}
         />
       </div>
       <p className="mt-4 text-lg font-semibold text-white">{member.name}</p>
@@ -114,7 +127,10 @@ export function TeamSlider() {
         {/* Mobile: single card carousel */}
         <div className="mt-12 md:hidden">
           <div className="flex justify-center">
-            <TeamCard member={teamMembers[index % N]} />
+            <TeamCard
+              member={teamMembers[index % N]}
+              priority={index % N < 4}
+            />
           </div>
           <div className="mt-6 flex items-center justify-center gap-4">
             <button
@@ -168,6 +184,7 @@ export function TeamSlider() {
                   member={member}
                   className="shrink-0"
                   style={{ width: `${100 / (2 * N)}%` }}
+                  priority={idx < 4}
                 />
               ))}
             </motion.div>

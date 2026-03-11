@@ -1,5 +1,8 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
-import type { Einsatz } from "@/content/einsaetze";
+import type { Einsatz, EinsatzMedia } from "@/content/einsaetze";
 
 function formatDate(iso: string) {
   const d = new Date(iso);
@@ -15,24 +18,14 @@ interface EventCardProps {
   mediaPosition: "left" | "right";
 }
 
-function EventMedia({ event }: { event: Einsatz }) {
-  if (!event.media) {
-    return (
-      <div
-        className="aspect-video w-full min-h-[200px] rounded-xl border border-[var(--border-accent)] flex items-center justify-center text-[var(--foreground-muted)] text-sm"
-        style={{ background: "var(--gradient-card)" }}
-      >
-        Kein Bild
-      </div>
-    );
-  }
-  if (event.media.type === "video") {
+function SingleMedia({ item }: { item: EinsatzMedia }) {
+  if (item.type === "video") {
     return (
       <div className="aspect-video w-full overflow-hidden rounded-xl border border-[var(--border-accent)] bg-black">
         <video
-          src={event.media.url}
+          src={item.url}
           controls
-          className="h-full w-full object-cover"
+          className="h-full w-full object-contain"
           playsInline
         >
           Dein Browser unterstützt das Video-Format nicht.
@@ -43,12 +36,120 @@ function EventMedia({ event }: { event: Einsatz }) {
   return (
     <div className="relative aspect-video w-full overflow-hidden rounded-xl border border-[var(--border-accent)]">
       <Image
-        src={event.media.url}
+        src={item.url}
         alt=""
         fill
         className="object-cover"
         sizes="(max-width: 768px) 100vw, 50vw"
       />
+    </div>
+  );
+}
+
+function EventMedia({ event }: { event: Einsatz }) {
+  const media = event.media;
+  if (!media) {
+    return (
+      <div
+        className="aspect-video w-full min-h-[200px] rounded-xl border border-[var(--border-accent)] flex items-center justify-center text-[var(--foreground-muted)] text-sm"
+        style={{ background: "var(--gradient-card)" }}
+      >
+        Kein Bild
+      </div>
+    );
+  }
+  const list = Array.isArray(media) ? media : [media];
+  if (list.length === 0) {
+    return (
+      <div
+        className="aspect-video w-full min-h-[200px] rounded-xl border border-[var(--border-accent)] flex items-center justify-center text-[var(--foreground-muted)] text-sm"
+        style={{ background: "var(--gradient-card)" }}
+      >
+        Kein Bild
+      </div>
+    );
+  }
+  if (list.length === 1) {
+    return <SingleMedia item={list[0]} />;
+  }
+  return (
+    <EventMediaCarousel list={list} />
+  );
+}
+
+function EventMediaCarousel({ list }: { list: EinsatzMedia[] }) {
+  const [index, setIndex] = useState(0);
+  const n = list.length;
+  const goPrev = () => setIndex((i) => (i - 1 + n) % n);
+  const goNext = () => setIndex((i) => (i + 1) % n);
+
+  return (
+    <div className="relative">
+      <div className="overflow-hidden rounded-xl border border-[var(--border-accent)]">
+        {list.map((item, i) => (
+          <div
+            key={i}
+            className="relative aspect-video w-full shrink-0"
+            style={{
+              display: i === index ? "block" : "none",
+            }}
+          >
+            {item.type === "video" ? (
+              <video
+                src={item.url}
+                controls
+                className="h-full w-full object-contain"
+                playsInline
+              >
+                Dein Browser unterstützt das Video-Format nicht.
+              </video>
+            ) : (
+              <Image
+                src={item.url}
+                alt=""
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+            )}
+          </div>
+        ))}
+      </div>
+      <button
+        type="button"
+        onClick={goPrev}
+        className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full border border-[var(--border-accent)] bg-[var(--background)]/90 p-2 text-white shadow-lg backdrop-blur transition hover:bg-[var(--primary)]/30 focus:outline-none focus:ring-2 focus:ring-[var(--secondary)]"
+        aria-label="Vorheriges Bild"
+      >
+        <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+      <button
+        type="button"
+        onClick={goNext}
+        className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full border border-[var(--border-accent)] bg-[var(--background)]/90 p-2 text-white shadow-lg backdrop-blur transition hover:bg-[var(--primary)]/30 focus:outline-none focus:ring-2 focus:ring-[var(--secondary)]"
+        aria-label="Nächstes Bild"
+      >
+        <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+      <div className="mt-2 flex justify-center gap-1.5">
+        {list.map((_, i) => (
+          <button
+            key={i}
+            type="button"
+            onClick={() => setIndex(i)}
+            className={`h-2 w-2 rounded-full transition ${
+              i === index
+                ? "bg-[var(--secondary)] shadow-[0_0_6px_var(--glow-secondary)]"
+                : "bg-white/40 hover:bg-white/60"
+            }`}
+            aria-label={`Bild ${i + 1}`}
+          />
+        ))}
+      </div>
     </div>
   );
 }

@@ -11,7 +11,8 @@ export interface Einsatz {
   description?: string;
   amountRaised?: number; // in Euro
   isPlanned?: boolean;
-  media?: EinsatzMedia;
+  /** Single media or multiple (e.g. gallery for one event) */
+  media?: EinsatzMedia | EinsatzMedia[];
 }
 
 export const einsaetze: Einsatz[] = [
@@ -22,6 +23,10 @@ export const einsaetze: Einsatz[] = [
     location: "Dortmund",
     description: "Verteilung von Lebensmitteln, Mützen, Süßigkeiten und selbstgebackenen Keksen.",
     isPlanned: false,
+    media: [
+      { type: "image", url: "/211225-dortmund.png" },
+      { type: "image", url: "/201226-dortmund2.png" },
+    ],
   },
   {
     id: "2",
@@ -31,7 +36,10 @@ export const einsaetze: Einsatz[] = [
     description: "Waffelverkauf zugunsten Bedürftiger.",
     amountRaised: 380,
     isPlanned: false,
-    media: { type: "image", url: "/070326-waffel.jpeg" },
+    media: [
+      { type: "image", url: "/070326-waffel.jpeg" },
+      { type: "video", url: "/070326-waffel.mp4" },
+    ],
   },
   {
     id: "3",
