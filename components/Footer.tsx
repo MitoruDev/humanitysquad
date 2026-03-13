@@ -100,6 +100,7 @@ export function Footer() {
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.5, delay: 0.2, ease: easeOut }}
           className="mt-8 border-t border-[var(--border)] pt-8 text-center text-xs text-[var(--muted)]"
+          suppressHydrationWarning
         >
           © {new Date().getFullYear()} Humanity Squad. Aktiv für einen guten
           Zweck.
