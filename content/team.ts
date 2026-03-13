@@ -24,7 +24,7 @@ export const teamMembers: TeamMember[] = [
     id: "3",
     name: "Marie",
     image: "/team/marie.png",
-    shortSentence: "Videograph.",
+    shortSentence: "Videograph",
   },
   {
     id: "4",
