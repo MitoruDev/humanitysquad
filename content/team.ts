@@ -55,7 +55,7 @@ export const teamMembers: TeamMember[] = [
   {
     id: "8",
     name: "Servet",
-    image: "/team/placeholder.svg",
+    image: "/team/servet.jpeg",
     shortSentence: "Organisator",
   },
 ];
