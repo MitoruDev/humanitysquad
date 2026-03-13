@@ -110,9 +110,19 @@ export function Footer() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.5, delay: 0.28, ease: easeOut }}
-          className="mt-2 text-center text-xs text-[var(--muted)]"
+          className="mt-2 flex items-center justify-center gap-1.5 text-xs text-[var(--muted)]"
         >
-          Website by Caner Elmas
+          Website by{" "}
+          <a
+            href="https://instagram.com/canersjourney"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-[var(--secondary)] transition hover:underline"
+            aria-label="Caner Elmas auf Instagram"
+          >
+            <InstagramIcon className="h-3.5 w-3.5" />
+            Caner Elmas
+          </a>
         </motion.p>
       </div>
     </footer>
