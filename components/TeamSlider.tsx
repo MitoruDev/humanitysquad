@@ -44,7 +44,6 @@ function TeamCard({
           fill
           className="object-cover"
           sizes="(min-width: 768px) 176px, 160px"
-          unoptimized
           priority={priority}
           onLoad={() => setLoaded(true)}
         />

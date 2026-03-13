@@ -30,6 +30,7 @@ export function Header() {
             alt="Humanity Squad"
             width={280}
             height={80}
+            sizes="(max-width: 640px) 112px, 128px"
             className="max-h-14 w-auto object-contain sm:max-h-16"
             priority
           />
