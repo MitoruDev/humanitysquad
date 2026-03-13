@@ -7,6 +7,24 @@ import { ScrollProgress } from "@/components/ScrollProgress";
 import { PageLoadSpinner } from "@/components/PageLoadSpinner";
 import { BackToTop } from "@/components/BackToTop";
 
+const SITE_URL = "https://humanitysquad.de";
+
+const personCanerElmasJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Caner Elmas",
+  image: `${SITE_URL}/team/caner.png`,
+  jobTitle: "Entwickler",
+  worksFor: {
+    "@type": "Organization",
+    name: "Humanity Squad",
+    url: SITE_URL,
+  },
+  url: SITE_URL,
+  sameAs: ["https://instagram.com/canersjourney"],
+  description: "Softwareentwickler bei Humanity Squad – Gemeinsam die Welt verbessern.",
+};
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -46,6 +64,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} min-h-screen antialiased bg-[var(--background)] text-[var(--foreground)]`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(personCanerElmasJsonLd),
+          }}
+        />
         <PageLoadSpinner />
         <ScrollProgress />
         <Header />

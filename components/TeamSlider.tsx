@@ -40,7 +40,7 @@ function TeamCard({
         )}
         <Image
           src={member.image}
-          alt={member.name}
+          alt={member.fullName ?? member.name}
           fill
           className="object-cover"
           sizes="(min-width: 768px) 176px, 160px"
